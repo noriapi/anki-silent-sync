@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling", "hatch-zipped-directory"]
+build-backend = "hatchling.build"
+
+[project]
+name = "anki-silent-sync"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "noriapi", email = "70106808+noriapi@users.noreply.github.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+
+[project.urls]
+Documentation = "https://github.com/unknown/anki-silent-sync#readme"
+Issues = "https://github.com/unknown/anki-silent-sync/issues"
+Source = "https://github.com/unknown/anki-silent-sync"
+
+[tool.hatch.build.targets.zipped-directory]
+install-name = ""
+sources = ["/src/anki_silent_sync"]
+exclude = ["tests"]
+
+[tool.hatch.version]
+path = "src/anki_silent_sync/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = ["coverage[toml]>=6.5", "pytest", "aqt[qt6]>=2.1.54"]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = ["- coverage combine", "coverage report"]
+cov = ["test-cov", "cov-report"]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.types]
+dependencies = ["mypy>=1.0.0"]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/anki_silent_sync tests}"
+
+[tool.coverage.run]
+source_pkgs = ["anki_silent_sync", "tests"]
+branch = true
+parallel = true
+omit = ["src/anki_silent_sync/__about__.py"]
+
+[tool.coverage.paths]
+anki_silent_sync = [
+  "src/anki_silent_sync",
+  "*/anki-silent-sync/src/anki_silent_sync",
+]
+tests = ["tests", "*/anki-silent-sync/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
