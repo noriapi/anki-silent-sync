@@ -28,9 +28,9 @@ dependencies = []
 
 
 [project.urls]
-Documentation = "https://github.com/unknown/anki-silent-sync#readme"
-Issues = "https://github.com/unknown/anki-silent-sync/issues"
-Source = "https://github.com/unknown/anki-silent-sync"
+Documentation = "https://github.com/noriapi/anki-silent-sync#readme"
+Issues = "https://github.com/noriapi/anki-silent-sync/issues"
+Source = "https://github.com/noriapi/anki-silent-sync"
 
 [tool.hatch.build.targets.zipped-directory]
 install-name = ""
